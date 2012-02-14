@@ -2,9 +2,8 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'views/popup',
   'text!templates/settings.html'
-], function($, _, Backbone, Popup, settingsTemplate){
+], function($, _, Backbone, settingsTemplate){
 
   var Settings = {};
 
