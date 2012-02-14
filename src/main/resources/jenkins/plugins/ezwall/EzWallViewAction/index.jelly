@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8"/>
+    <title>EZWall</title>
+    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/ezwall/css/Aristo/Aristo.css" />
+    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/ezwall/css/ezwall.css" />  
+    <script type="text/javascript" src="${rootURL}/plugin/ezwall/js/require.js"></script>
+	<script>
+		require.config({
+			baseUrl: "${rootURL}/plugin/ezwall/js",
+			paths: {
+				jquery: 'libs/jquery-1.7.1.min',
+				jqueryui: 'libs/jquery-ui-1.8.17.min',
+				jquerytmpl: 'libs/jquery.tmpl.min',
+				underscore: 'libs/underscore-amd-min',
+				backbone: 'libs/backbone-0.9.1-amd-min'
+			}
+		});
+
+		require([
+			'order!jquery',
+			'order!underscore',
+			'order!backbone',
+			'order!jquerytmpl',
+			'order!jqueryui',
+			'order!app'
+		], function($$, _, backbone, jqueryTmpl, jqueryUi, App){
+			console.log('EZWall starting...');
+			App.start();
+		});
+	</script>
+  </head>
+
+  <body>
+    <div id="ezwall-container">
+      <div id="dashboard"></div>
+      <div id="header-display-zone"></div>
+      <header id="header" class="header"></header>
+    </div>    
+  </body>
+
+</html>
