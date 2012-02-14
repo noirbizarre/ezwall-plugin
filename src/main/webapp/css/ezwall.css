@@ -60,19 +60,37 @@ body {
 	font-size: 2em;
 	text-align: center;
 	border-radius: 10px;
+	box-shadow: 2px 2px 3px gray;
+	
+	/* CSS3 Box layout */
+	
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+	
+  	-webkit-box-pack: center;
+  	-moz-box-pack: center;
+  	box-pack: center;
+  	
+  	-webkit-box-align: center;
+  	-moz-box-align: center;
+  	box-align: center;
 }
 
-#build-grid .job p {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 1px;
-	vertical-align: middle;
+#build-grid .job a {
+	text-decoration: none;
 }
 
-#build-grid .job .job-name {
+#build-grid .job-name {
 	color: white;
-	text-shadow: black;
+	text-shadow: 0px 2px 3px #555;
+	font-weight: bold;
+	display:inline-block;
+	vertical-align: middle;
 }
 
 .job-status-no {
