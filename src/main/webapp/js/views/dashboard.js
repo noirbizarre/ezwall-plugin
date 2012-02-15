@@ -24,12 +24,14 @@ define([
       this.$el.empty();
       this.collection.each(this.addJob);
       this.resize();
+      this.animate()
       console.log('Dashboard.Grid: rendered');
       return this;  
     },
 
     addJob: function(job) {
-      $.tmpl(this.template, job.toJSON()).appendTo(this.$el);
+      var jobEl = $.tmpl(this.template, job.toJSON()).appendTo(this.$el);
+      if (job.get('building')) jobEl.addClass('job-building');
     },
 
     resize: function() {
@@ -51,6 +53,18 @@ define([
         });
         this.$('.job').width(width).height(height);
       }
+    },
+    
+    animate: function() {
+    	if (this.timer) {
+    		clearInterval(this.timer);
+    		delete this.timer;
+    	}
+    	this.timer = setInterval(this._animation, 1500);
+    },
+    
+    _animation: function() {
+    	this.$('.job-building').toggleClass('job-glow');
     }
 
   });

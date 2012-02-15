@@ -66,18 +66,26 @@ body {
 	
 	display: -webkit-box;
 	display: -moz-box;
+	display: -o-box;
+	display: -ms-box;
 	display: box;
 	
 	-webkit-box-orient: vertical;
 	-moz-box-orient: vertical;
+	-o-box-orient: vertical;
+	-ms-box-orient: vertical;
 	box-orient: vertical;
 	
   	-webkit-box-pack: center;
   	-moz-box-pack: center;
+  	-o-box-pack: center;
+  	-ms-box-pack: center;
   	box-pack: center;
   	
   	-webkit-box-align: center;
   	-moz-box-align: center;
+  	-o-box-align: center;
+  	-ms-box-align: center;
   	box-align: center;
 }
 
@@ -109,6 +117,10 @@ body {
 	background: yellow;
 }
 
-.job-status-building {
-	background: yellow;
+#build-grid .job-glow {
+  	-webkit-box-shadow: inset 0 0 10px 5px white, 0 0 15px white; 
+    -moz-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
+	-o-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
+	-ms-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
+	box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
 }
