@@ -4,6 +4,11 @@ define([
 ], function(_, Backbone){
 	
 	var Jenkins = {};
+	
+	Jenkins.STATUS_OK = 'ok';
+	Jenkins.STATUS_KO = 'ko';
+	Jenkins.STATUS_INSTABLE = 'instable';
+	Jenkins.STATUS_NONE = 'none';
 
 	Jenkins.Model = Backbone.Model.extend({
 		url: function() {
@@ -14,28 +19,30 @@ define([
 	Jenkins.Job = Jenkins.Model.extend({
 	    defaults: {
 		    name: "My job",
+		    status: Jenkins.STATUS_NONE,
+		    building: false
 		},
-		status: function() {
-			switch (this.get('color')) {
+		
+		color_regex: /([A-Za-z]+)(_anime)?/,
+		
+		parse: function(data) {
+			var m = this.color_regex.exec(data.color);
+			
+			switch (m[1]) {
 				case 'blue':
-					return 'ok';
+					data.status = Jenkins.STATUS_OK;
 					break;
 				case 'red':
-					return 'ko';
+					data.status = Jenkins.STATUS_KO;
 					break;
 				case 'yellow':
-					return 'instable';
-					break;
-				case 'blue_anime':
-				case 'red_anime':
-				case 'grey_anime':
-				case 'yellow_anime':
-					return 'building';
+					data.status = Jenkins.STATUS_INSTABLE;
 					break;
 				default:
-					return 'no';
 					break;
 			}
+			if (m[2]) data.building = true;
+			return data;
 		}
 	});
 
@@ -55,17 +62,15 @@ define([
 			});
 			_.bindAll(this, 'poll');
 		},
-		parse: function(resp, xhr) {
-			this.get('jobs').reset(resp.jobs);
+		parse: function(data, xhr) {
+			this.get('jobs').reset(data.jobs, {parse: true});
+			delete data.jobs;
+			return data;
 		},
 		poll: function() {
 			this.fetch();
 			_.delay(this.poll, this.get('refresh')*1000);
 		}
-	});
-
-	Jenkins.ViewList = Backbone.Collection.extend({
-	    model: Jenkins.View
 	});
 
 	return Jenkins;

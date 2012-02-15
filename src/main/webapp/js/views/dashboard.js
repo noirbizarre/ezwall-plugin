@@ -29,7 +29,7 @@ define([
     },
 
     addJob: function(job) {
-      $.tmpl(this.template, job.toJSON()).addClass('job-status-'+job.status()).appendTo(this.$el);
+      $.tmpl(this.template, job.toJSON()).appendTo(this.$el);
     },
 
     resize: function() {
