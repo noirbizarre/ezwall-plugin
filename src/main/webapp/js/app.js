@@ -8,7 +8,7 @@ define([
     // Backbone.history.start({pushState: true});
     // Router.navigate('');
     Backbone.history.start();
-    console.log('Buildmon started');
+    console.log('EzWall started');
   };
 
   return {

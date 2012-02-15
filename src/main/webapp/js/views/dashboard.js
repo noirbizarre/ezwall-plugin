@@ -8,6 +8,26 @@ define([
 
   var Dashboard = {};
 
+  Dashboard.Cell = Backbone.View.extend({
+	  
+	  className: 'job',
+	  
+	  initialize: function() {
+		  _.bindAll(this, 'render');
+		  this.template = $.template(jobTemplate);
+	      this.model.on('change', this.render);
+	  },
+	  
+	  render: function() {
+		  this.$el.empty();
+		  $.tmpl(this.template, this.model.toJSON()).appendTo(this.$el);
+		  this.$el.addClass('job-status-'+this.model.get('status'));
+	      this.$el.toggleClass('job-building', this.model.get('building'));
+	      return this;
+	  }
+	  
+  });
+  
   Dashboard.Grid = Backbone.View.extend({
     
     initialize: function() {
@@ -30,8 +50,10 @@ define([
     },
 
     addJob: function(job) {
-      var jobEl = $.tmpl(this.template, job.toJSON()).appendTo(this.$el);
-      if (job.get('building')) jobEl.addClass('job-building');
+    	var cell = new Dashboard.Cell({
+            model: job
+        }).render();
+    	this.$el.append(cell.el);
     },
 
     resize: function() {
@@ -94,6 +116,7 @@ define([
     }
 
   });
+  
 
   return Dashboard;
 

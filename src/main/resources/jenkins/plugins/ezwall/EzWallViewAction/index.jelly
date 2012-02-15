@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/ezwall/css/ezwall.css" />  
     <script type="text/javascript" src="${rootURL}/plugin/ezwall/js/require.js"></script>
 	<script>
+		console.log('EZWall starting...');
 		require.config({
 			baseUrl: "${rootURL}/plugin/ezwall/js",
 			paths: {
@@ -27,7 +28,6 @@
 			'order!jqueryui',
 			'order!app'
 		], function($$, _, backbone, jqueryTmpl, jqueryUi, App){
-			console.log('EZWall starting...');
 			App.start();
 		});
 	</script>

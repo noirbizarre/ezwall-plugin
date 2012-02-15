@@ -17,6 +17,8 @@ define([
 
     initialize: function() {
       console.log('AppRouter: initiliaze');
+      
+      _.bindAll(this, '_startPolling');
 
       // Initialize settings
       _.bindAll(this,'loadSettings');
@@ -41,9 +43,15 @@ define([
       this.dashboard.render();
       
       this.loadSettings();
-      this.view.poll();
+      this.view.fetch({
+    	  success: this._startPolling
+      });
 
       console.log('AppRouter: initiliazed');
+    },
+    
+    _startPolling: function() {
+    	this.view.poll();
     },
 
     showHome: function() {

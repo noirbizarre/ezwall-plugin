@@ -41,13 +41,24 @@ define([
 				default:
 					break;
 			}
-			if (m[2]) data.building = true;
+			data.building = m[2] != undefined;
 			return data;
 		}
 	});
 
 	Jenkins.JobList = Backbone.Collection.extend({
-	    model: Jenkins.Job
+	    model: Jenkins.Job,
+	    
+	    initialize: function() {
+	    	_.bindAll(this, 'poll');
+	    },
+	    
+	    poll: function(refresh){
+	    	this.each(function(job){
+				job.fetch()
+			});
+	    	_.delay(this.poll, refresh*1000, refresh);
+	    }
 	});
 
 	Jenkins.View = Jenkins.Model.extend({
@@ -68,8 +79,7 @@ define([
 			return data;
 		},
 		poll: function() {
-			this.fetch();
-			_.delay(this.poll, this.get('refresh')*1000);
+			this.get('jobs').poll(this.get('refresh'));
 		}
 	});
 
