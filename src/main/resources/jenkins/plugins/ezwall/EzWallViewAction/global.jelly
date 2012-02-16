@@ -20,7 +20,7 @@
 
 	<f:section title="${%EzWall.Title}" name="ezwall">
 		<f:entry title="${%EzWall.PollInterval}" field="pollInterval">
-			<f:textbox default="3"/>
+			<f:textbox default="5"/>
 		</f:entry>
 	</f:section>
 

@@ -23,19 +23,17 @@
  */
 package jenkins.plugins.ezwall;
 
-import jenkins.model.Jenkins;
-
-import net.sf.json.JSONObject;
-
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
-
 import hudson.Extension;
 import hudson.model.Action;
 import hudson.model.Describable;
 import hudson.model.Api;
 import hudson.model.Descriptor;
+import jenkins.model.Jenkins;
+import net.sf.json.JSONObject;
+
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
 
 /**
  * Display the EzWall action on each view.
@@ -82,15 +80,13 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	}
 
 	public EzWallViewActionDescriptor getDescriptor() {
-		return EzWallViewActionDescriptor.class.cast(Jenkins.getInstance()
-				.getDescriptorOrDie(getClass()));
+		return EzWallViewActionDescriptor.class.cast(Jenkins.getInstance().getDescriptorOrDie(getClass()));
 	}
 
 	@Extension
-	public static final class EzWallViewActionDescriptor extends
-			Descriptor<EzWallViewAction> {
+	public static final class EzWallViewActionDescriptor extends Descriptor<EzWallViewAction> {
 
-		private int pollInterval;
+		private int pollInterval = 5;
 
 		@Override
 		public String getDisplayName() {
@@ -98,8 +94,7 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 		}
 
 		@Override
-		public boolean configure(StaplerRequest req, JSONObject json)
-				throws FormException {
+		public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
 			req.bindJSON(this, json.getJSONObject("ezwall"));
 			save();
 			return true;
