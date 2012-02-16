@@ -37,16 +37,16 @@ import java.util.List;
 @Extension
 public class EzWallViewActionFactory extends TransientViewActionFactory {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see hudson.model.TransientViewActionFactory#createFor(hudson.model.View)
-     */
-    @Override
-    public List<Action> createFor(View view) {
-	List<Action> result = new ArrayList<Action>();
-	result.add(new EzWallViewAction());
-	return result;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see hudson.model.TransientViewActionFactory#createFor(hudson.model.View)
+	 */
+	@Override
+	public List<Action> createFor(View view) {
+		List<Action> result = new ArrayList<Action>();
+		result.add(new EzWallViewAction());
+		return result;
+	}
 
 }

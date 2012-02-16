@@ -15,6 +15,13 @@ define([
 			return '%s/api/json'.replace('%s', this.get('url'));
 		}
 	});
+	
+	Jenkins.EzWall = Jenkins.Model.extend({
+		defaults: {
+			url: "http://localhost:8080/ezwall",
+			pollInterval: 5
+		}
+	});
 
 	Jenkins.Job = Jenkins.Model.extend({
 	    defaults: {
@@ -68,19 +75,35 @@ define([
 		    refresh: 10
 		},
 		initialize: function() {
-			this.set({
-				jobs: new Jenkins.JobList()
+			var ezWall = new Jenkins.EzWall({
+				url: this.get('url')+'/ezwall'
 			});
-			_.bindAll(this, 'poll');
+			ezWall.on('change', this.updateSettings, this);
+			this.set({
+				jobs: new Jenkins.JobList(),
+				ezwall: ezWall
+			});
 		},
 		parse: function(data, xhr) {
 			this.get('jobs').reset(data.jobs, {parse: true});
 			delete data.jobs;
 			return data;
 		},
+		fetch: function(options) {
+			var view = this;
+			this.get('ezwall').fetch({
+				success: function() {
+					Jenkins.Model.prototype.fetch.call(view, options);
+				}
+			});
+		},
 		poll: function() {
 			this.get('jobs').poll(this.get('refresh'));
-		}
+		},
+		updateSettings: function() {
+	      this.set('refresh', this.get('ezwall').get('pollInterval'));
+	    }
+	    
 	});
 
 	return Jenkins;

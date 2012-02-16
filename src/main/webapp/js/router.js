@@ -20,13 +20,6 @@ define([
       
       _.bindAll(this, '_startPolling');
 
-      // Initialize settings
-      _.bindAll(this,'loadSettings');
-      this.settings = new SettingsModel({
-    	  jenkinsUrl: '..'
-      });
-      this.settings.on('change', this.loadSettings, this);
-
       // Initialize menu
       this.menu = new Menu;
       this.menu.render();
@@ -38,11 +31,14 @@ define([
       }, this);
 
       // Initialize Dashboard
-      this.view = new Jenkins.View;
-      this.dashboard = new Dashboard.View({model: this.view});
+      this.view = new Jenkins.View({
+    	  url: '..'
+      });
+      this.dashboard = new Dashboard.View({
+    	  model: this.view
+      });
       this.dashboard.render();
       
-      this.loadSettings();
       this.view.fetch({
     	  success: this._startPolling
       });
@@ -77,12 +73,8 @@ define([
       popup.on(About.CLOSE, function(){
         this.navigate('', true);
       }, this);
-    },
-
-    loadSettings: function() {
-      this.view.set('url', this.settings.get('jenkinsUrl'));
-      this.view.set('refresh', this.settings.get('refresh'));
     }
+    
   });
 
   return new AppRouter();
