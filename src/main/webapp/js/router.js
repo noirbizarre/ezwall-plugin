@@ -57,7 +57,7 @@ define([
     showSettings: function(){
       console.log('AppRouter: settings');
       var popup = new Settings.Popup({
-        model: this.settings
+        model: this.view.get('ezwall')
       });
       popup.render();
       popup.on(Settings.CLOSE, function(){
