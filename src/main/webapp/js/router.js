@@ -4,9 +4,8 @@ define([
   'views/settings',
   'views/dashboard',
   'views/about',
-  'models/jenkins',
-  'models/settings'
-], function(Backbone, Menu, Settings, Dashboard, About, Jenkins, SettingsModel){
+  'models/jenkins'
+], function(Backbone, Menu, Settings, Dashboard, About, Jenkins){
   var AppRouter = Backbone.Router.extend({
     routes: {
       'settings': 'showSettings',
