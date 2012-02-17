@@ -56,15 +56,10 @@ define([
 	Jenkins.JobList = Backbone.Collection.extend({
 	    model: Jenkins.Job,
 	    
-	    initialize: function() {
-	    	_.bindAll(this, 'poll');
-	    },
-	    
-	    poll: function(refresh){
+	    fetchAll: function() {
 	    	this.each(function(job){
 				job.fetch()
 			});
-	    	_.delay(this.poll, refresh*1000, refresh);
 	    }
 	});
 
@@ -75,6 +70,7 @@ define([
 		    refresh: 10
 		},
 		initialize: function() {
+			_.bindAll(this, 'poll');
 			var ezWall = new Jenkins.EzWall({
 				url: this.get('url')+'/ezwall'
 			});
@@ -98,7 +94,8 @@ define([
 			});
 		},
 		poll: function() {
-			this.get('jobs').poll(this.get('refresh'));
+			this.get('jobs').fetchAll();
+	    	_.delay(this.poll, this.get('refresh')*1000);
 		},
 		updateSettings: function() {
 	      this.set('refresh', this.get('ezwall').get('pollInterval'));
