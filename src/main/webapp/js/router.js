@@ -20,6 +20,9 @@ define([
       // Initialize menu
       this.menu = new Menu;
       this.menu.render();
+      this.menu.on('menu:refresh', function(){
+          this.view.fetch();
+      }, this);
       this.menu.on('menu:settings', function(){
         this.navigate('settings', true);
       }, this);

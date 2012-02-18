@@ -27,8 +27,9 @@ define([
     },
 
     events: {
-      "click #settings-button": "displaySettings",
-      "click #about-button": "displayAbout"
+    	"click #refresh-button": "refresh",
+    	"click #settings-button": "displaySettings",
+    	"click #about-button": "displayAbout"
     },
 
     showMenu: function() {
@@ -49,6 +50,12 @@ define([
 
     onHidden: function() {
       this._visible = false;
+    },
+
+
+    refresh: function(event) {
+      console.log('Menu: refresh');
+      this.trigger('menu:refresh');
     },
 
     displaySettings: function(event) {
