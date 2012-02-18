@@ -65,7 +65,9 @@ define([
 		showAbout : function() {
 			console.log('AppRouter: about');
 
-			var popup = new About.Popup;
+			var popup = new About.Popup({
+				model : Jenkins.config
+			});
 			popup.render();
 			popup.on(About.CLOSE, function() {
 				this.navigate('', true);

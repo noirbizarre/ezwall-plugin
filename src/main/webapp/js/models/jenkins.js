@@ -19,7 +19,8 @@ define([
 	Jenkins.EzWall = Jenkins.Model.extend({
 		defaults : {
 			url : "http://localhost:8080/ezwall",
-			pollInterval : 5
+			pollInterval : 5,
+			version : "NA"
 		}
 	});
 

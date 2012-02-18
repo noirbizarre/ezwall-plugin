@@ -24,6 +24,7 @@
 package jenkins.plugins.ezwall;
 
 import hudson.Extension;
+import hudson.PluginWrapper;
 import hudson.model.Action;
 import hudson.model.Describable;
 import hudson.model.Api;
@@ -43,6 +44,10 @@ import org.kohsuke.stapler.export.ExportedBean;
 @ExportedBean
 public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 
+	public final static String SHORT_NAME = "ezwall";
+	
+	public final static String DISPLAY_NAME = "EzWall";
+	
 	public Api getApi() {
 		return new Api(this);
 	}
@@ -53,7 +58,7 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	 * @see hudson.model.Action#getDisplayName()
 	 */
 	public String getDisplayName() {
-		return "EzWall";
+		return DISPLAY_NAME;
 	}
 
 	/*
@@ -71,16 +76,25 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	 * @see hudson.model.Action#getUrlName()
 	 */
 	public String getUrlName() {
-		return "ezwall";
+		return SHORT_NAME;
 	}
 
 	@Exported
 	public int getPollInterval() {
 		return getDescriptor().getPollInterval();
 	}
+	
+	@Exported
+	public String getVersion() {
+		return getPluginWrapper().getVersion();
+	}
 
 	public EzWallViewActionDescriptor getDescriptor() {
 		return EzWallViewActionDescriptor.class.cast(Jenkins.getInstance().getDescriptorOrDie(getClass()));
+	}
+	
+	public PluginWrapper getPluginWrapper() {
+		return Jenkins.getInstance().getPlugin(SHORT_NAME).getWrapper();
 	}
 
 	@Extension
@@ -90,7 +104,7 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 
 		@Override
 		public String getDisplayName() {
-			return "EzWall";
+			return DISPLAY_NAME;
 		}
 
 		@Override

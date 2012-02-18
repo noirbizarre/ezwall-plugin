@@ -13,7 +13,7 @@ define([
 
 		render : function() {
 			_.bindAll(this, 'close');
-			$.tmpl(aboutTmpl, {}).appendTo(this.$el);
+			$.tmpl(aboutTmpl, this.model.toJSON()).appendTo(this.$el);
 			this.$el.dialog({
 				title : "EzWall",
 				modal : true,
