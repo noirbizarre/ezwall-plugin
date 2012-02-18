@@ -17,8 +17,6 @@ define([
     initialize: function() {
       console.log('AppRouter: initiliaze');
       
-      _.bindAll(this, '_startPolling');
-
       // Initialize menu
       this.menu = new Menu;
       this.menu.render();
@@ -28,25 +26,23 @@ define([
       this.menu.on('menu:about', function(){
         this.navigate('about', true);
       }, this);
-
+      
+      
+      // Inialize the jenkins View
+      this.view = new Jenkins.View();
+      
       // Initialize Dashboard
-      this.view = new Jenkins.View({
-    	  url: '..'
-      });
       this.dashboard = new Dashboard.View({
     	  model: this.view
       });
       this.dashboard.render();
       
-      this.view.fetch({
-    	  success: this._startPolling
-      });
+      // Bootstrap ezWall config
+      Jenkins.config.set('url', '.');
+      Jenkins.config.fetch();
+      
 
       console.log('AppRouter: initiliazed');
-    },
-    
-    _startPolling: function() {
-    	this.view.poll();
     },
 
     showHome: function() {
@@ -56,7 +52,7 @@ define([
     showSettings: function(){
       console.log('AppRouter: settings');
       var popup = new Settings.Popup({
-        model: this.view.get('ezwall')
+        model: Jenkins.config
       });
       popup.render();
       popup.on(Settings.CLOSE, function(){

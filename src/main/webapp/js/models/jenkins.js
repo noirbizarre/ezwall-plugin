@@ -22,6 +22,8 @@ define([
 			pollInterval: 5
 		}
 	});
+	
+	Jenkins.config = new Jenkins.EzWall();
 
 	Jenkins.Job = Jenkins.Model.extend({
 	    defaults: {
@@ -70,35 +72,30 @@ define([
 		    refresh: 10
 		},
 		initialize: function() {
-			_.bindAll(this, 'poll');
-			var ezWall = new Jenkins.EzWall({
-				url: this.get('url')+'/ezwall'
-			});
-			ezWall.on('change', this.updateSettings, this);
+			_.bindAll(this, 'poll', 'updateSettings');
+			Jenkins.config.on('change', this.updateSettings, this);
 			this.set({
-				jobs: new Jenkins.JobList(),
-				ezwall: ezWall
+				jobs: new Jenkins.JobList()
 			});
+			this.poll();
 		},
 		parse: function(data, xhr) {
 			this.get('jobs').reset(data.jobs, {parse: true});
 			delete data.jobs;
 			return data;
 		},
-		fetch: function(options) {
-			var view = this;
-			this.get('ezwall').fetch({
-				success: function() {
-					Jenkins.Model.prototype.fetch.call(view, options);
-				}
-			});
-		},
 		poll: function() {
-			this.get('jobs').fetchAll();
-	    	_.delay(this.poll, this.get('refresh')*1000);
+			var interval = Jenkins.config.get('pollInterval');
+			if (interval > 0) {
+				this.get('jobs').fetchAll();
+				_.delay(this.poll, interval*1000);
+			}
 		},
 		updateSettings: function() {
-	      this.set('refresh', this.get('ezwall').get('pollInterval'));
+			if (Jenkins.config.hasChanged('url')) {
+				this.set('url', Jenkins.config.get('url') + '/..');
+				this.fetch();
+			}
 	    }
 	    
 	});
