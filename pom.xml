@@ -63,5 +63,14 @@
 		<developerConnection>scm:git:git@github.com:jenkinsci/ezwall-plugin.git</developerConnection>
 		<url>https://github.com/jenkinsci/ezwall-plugin</url>
 	</scm>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>1.4</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 </project>
