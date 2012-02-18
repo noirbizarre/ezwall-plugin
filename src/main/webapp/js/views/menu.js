@@ -4,72 +4,72 @@ define([
   'backbone',
   'text!templates/menu.html'
 ], function($, _, Backbone, menuTemplate){
+				
+	var Menu = Backbone.View.extend({
 
-  var Menu = Backbone.View.extend({
-    
-    el: $('#header'),
+		el : $('#header'),
 
-    initialize: function() {
-      console.log('Menu: initialize');
-      _.bindAll(this,'render', 'showMenu', 'hideMenu', 'onVisble', 'onHidden');
-      console.log('Menu: initialized');
-      this._visible = false;
-    },
-     
-    render: function() {
-      console.log('Menu: render');
-      $.tmpl(menuTemplate, {}).appendTo(this.el);
-      $('.menu-button').button();
-      $('#header-display-zone').mouseenter(this.showMenu);
-      this.$el.mouseleave(this.hideMenu);
-      console.log('Menu: rendered');
-      return this;  
-    },
+		initialize : function() {
+			console.log('Menu: initialize');
+			_.bindAll(this, 'render', 'showMenu', 'hideMenu',
+					'onVisble', 'onHidden');
+			console.log('Menu: initialized');
+			this._visible = false;
+		},
 
-    events: {
-    	"click #refresh-button": "refresh",
-    	"click #settings-button": "displaySettings",
-    	"click #about-button": "displayAbout"
-    },
+		render : function() {
+			console.log('Menu: render');
+			$.tmpl(menuTemplate, {}).appendTo(this.el);
+			$('.menu-button').button();
+			$('#header-display-zone').mouseenter(this.showMenu);
+			this.$el.mouseleave(this.hideMenu);
+			console.log('Menu: rendered');
+			return this;
+		},
 
-    showMenu: function() {
-      if (!this._visible) {
-        this.$el.slideDown('fast', this.onVisble);
-      }
-    },
+		events : {
+			"click #refresh-button" : "refresh",
+			"click #settings-button" : "displaySettings",
+			"click #about-button" : "displayAbout"
+		},
 
-    hideMenu: function() {
-      if (this._visible) {
-        this.$el.slideUp('fast', this.onHidden);
-      }
-    },
+		showMenu : function() {
+			if (!this._visible) {
+				this.$el.slideDown('fast', this.onVisble);
+			}
+		},
 
-    onVisble: function() {
-      this._visible = true;
-    },
+		hideMenu : function() {
+			if (this._visible) {
+				this.$el.slideUp('fast', this.onHidden);
+			}
+		},
 
-    onHidden: function() {
-      this._visible = false;
-    },
+		onVisble : function() {
+			this._visible = true;
+		},
 
+		onHidden : function() {
+			this._visible = false;
+		},
 
-    refresh: function(event) {
-      console.log('Menu: refresh');
-      this.trigger('menu:refresh');
-    },
+		refresh : function(event) {
+			console.log('Menu: refresh');
+			this.trigger('menu:refresh');
+		},
 
-    displaySettings: function(event) {
-      console.log('Menu: displaySettings');
-      this.trigger('menu:settings');
-    },
+		displaySettings : function(event) {
+			console.log('Menu: displaySettings');
+			this.trigger('menu:settings');
+		},
 
-    displayAbout: function(event) {
-      console.log('Menu: displayAbout');
-      this.trigger('menu:about');
-    }
+		displayAbout : function(event) {
+			console.log('Menu: displayAbout');
+			this.trigger('menu:about');
+		}
 
-  });
+	});
 
-  return Menu;
+	return Menu;
 
 });
