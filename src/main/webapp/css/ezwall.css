@@ -21,13 +21,17 @@ body {
 	position:absolute;
     top:0;
     left:0;
+	z-index: 0;
     
     width:100%;
 	height: 35px;
 	display: none;
 
 	background: grey;
-	z-index: 0;
+	background-color: grey; /* Fall-back color */
+	background-image: -webkit-linear-gradient(top, grey, #000);
+	background-image: -moz-linear-gradient(top, grey, #000);
+	background-image: linear-gradient(top, grey, #000);
 }
 
 #header-display-zone {
@@ -120,7 +124,7 @@ body {
 }
 
 .job-status-instable {
-	background: yellow;
+	background: orange;
 }
 
 #build-grid .job-glow {
