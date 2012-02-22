@@ -20,7 +20,10 @@ define([
 		render : function() {
 			console.log('Menu: render');
 			$.tmpl(menuTemplate, {}).appendTo(this.el);
-			$('.menu-button').button();
+			//this.$('.menu-button').button();
+			this.$( '#refresh-button' ).button({ icons: {primary:'ui-icon-refresh'}});
+			this.$( '#settings-button' ).button({ icons: {primary:'ui-icon-wrench'}});
+			this.$( '#about-button' ).button({ icons: {primary:'ui-icon-help'}});
 			$('#header-display-zone').mouseenter(this.showMenu);
 			this.$el.mouseleave(this.hideMenu);
 			console.log('Menu: rendered');
@@ -28,6 +31,7 @@ define([
 		},
 
 		events : {
+			"click #hide-button" : "hideMenu",
 			"click #refresh-button" : "refresh",
 			"click #settings-button" : "displaySettings",
 			"click #about-button" : "displayAbout"

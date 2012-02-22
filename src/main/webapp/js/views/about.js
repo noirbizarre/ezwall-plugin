@@ -15,7 +15,7 @@ define([
 			_.bindAll(this, 'close');
 			$.tmpl(aboutTmpl, this.model.toJSON()).appendTo(this.$el);
 			this.$el.dialog({
-				title : "EzWall",
+				title : "EzWall "+this.model.get('version'),
 				modal : true,
 				close : this.close
 			});
