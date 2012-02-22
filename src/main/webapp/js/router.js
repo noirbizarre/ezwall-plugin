@@ -22,7 +22,7 @@ define([
 			this.menu = new Menu;
 			this.menu.render();
 			this.menu.on('menu:refresh', function() {
-				this.view.fetch();
+				this.view.fetchAll();
 			}, this);
 			this.menu.on('menu:settings', function() {
 				this.navigate('settings', true);

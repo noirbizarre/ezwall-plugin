@@ -96,7 +96,7 @@ define([
         ],
 		
 		initialize : function() {
-			_.bindAll(this, 'poll', 'updateSettings');
+			_.bindAll(this, 'poll', 'updateSettings', 'fetchJobs');
 			Jenkins.config.on('change', this.updateSettings, this);
 			this.set({
 				jobs : new Jenkins.JobList()
@@ -123,8 +123,18 @@ define([
 		updateSettings : function() {
 			if (Jenkins.config.hasChanged('url')) {
 				this.set('url', Jenkins.config.get('url') + '/..');
-				this.fetch();
+				this.fetchAll();
 			}
+		},
+		
+		fetchAll: function() {
+			this.fetch({
+				success: this.fetchJobs
+			});
+		},
+		
+		fetchJobs : function() {
+			this.get('jobs').fetchAll();
 		}
 		
 
