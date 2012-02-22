@@ -12,7 +12,11 @@ define([
 
 	Jenkins.Model = Backbone.Model.extend({
 		url : function() {
-			return '%s/api/json'.replace('%s', this.get('url'));
+			var url = '%s/api/json'.replace('%s', this.get('url'));
+			if (this.tree) {
+				url += '?tree=' + this.tree.join(',');
+			}
+			return url;
 		}
 	});
 
@@ -25,6 +29,10 @@ define([
 	});
 
 	Jenkins.config = new Jenkins.EzWall();
+	
+	Jenkins.Build = Jenkins.Model.extend({});
+	
+	Jenkins.User = Jenkins.Model.extend({});
 
 	Jenkins.Job = Jenkins.Model.extend({
 		defaults : {
@@ -32,6 +40,14 @@ define([
 			status : Jenkins.STATUS_NONE,
 			building : false
 		},
+		tree : [
+	        "displayName",
+	        "name",
+	        "url",
+	        "buildable",
+	        "color",
+	        "lastBuild[number,url]"
+        ],
 
 		color_regex : /([A-Za-z]+)(_anime)?/,
 
@@ -61,7 +77,7 @@ define([
 
 		fetchAll : function() {
 			this.each(function(job) {
-				job.fetch()
+				job.fetch();
 			});
 		}
 	});
@@ -72,6 +88,12 @@ define([
 			url : "http://localhost:8080/",
 			refresh : 10
 		},
+		
+		tree : [
+	        "name",
+	        "url",
+	        "jobs[name,url,color]"
+        ],
 		
 		initialize : function() {
 			_.bindAll(this, 'poll', 'updateSettings');
@@ -104,6 +126,7 @@ define([
 				this.fetch();
 			}
 		}
+		
 
 	});
 
