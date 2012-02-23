@@ -2,10 +2,11 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'models/gravatar',
   'text!templates/dashboard.html',
   'text!templates/job.html',
   'text!templates/user.html'
-], function($, _, Backbone, dashboardTemplate, jobTemplate, userTemplate){
+], function($, _, Backbone, Gravatar, dashboardTemplate, jobTemplate, userTemplate){
 
 	var Dashboard = {};
 
@@ -45,7 +46,11 @@ define([
 
 		render : function() {
 			this.$el.empty();
-			$.tmpl(this.template, this.model.toJSON()).appendTo(this.$el);
+			var json = this.model.toJSON();
+			if (this.model.has('email')) {
+				json.avatar_url = Gravatar.url(this.model.get('email'));
+			}
+			$.tmpl(this.template, json).appendTo(this.$el);
 			return this;
 		}
 	});
