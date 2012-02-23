@@ -88,7 +88,12 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	public String getVersion() {
 		return getPluginWrapper().getVersion();
 	}
-
+	
+	@Exported
+	public String getRootUrl() {
+		return Jenkins.getInstance().getRootUrl();
+	}
+	
 	public EzWallViewActionDescriptor getDescriptor() {
 		return EzWallViewActionDescriptor.class.cast(Jenkins.getInstance().getDescriptorOrDie(getClass()));
 	}

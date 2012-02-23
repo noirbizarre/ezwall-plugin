@@ -3,8 +3,9 @@ define([
   'underscore',
   'backbone',
   'text!templates/dashboard.html',
-  'text!templates/job.html'
-], function($, _, Backbone, dashboardTemplate, jobTemplate){
+  'text!templates/job.html',
+  'text!templates/user.html'
+], function($, _, Backbone, dashboardTemplate, jobTemplate, userTemplate){
 
 	var Dashboard = {};
 
@@ -20,12 +21,33 @@ define([
 
 		render : function() {
 			this.$el.empty();
-			$.tmpl(this.template, this.model.toJSON()).appendTo(this.$el);
+			var json = this.model.toJSON();
+			$.tmpl(this.template, json).appendTo(this.$el);
 			this.$el.addClass('job-status-' + this.model.get('status'));
 			this.$el.toggleClass('job-building', this.model.get('building'));
+			if (this.model.users && this.model.users.length > 0) {
+				var userView = new Dashboard.UserView({
+					model: this.model.users[0]
+				});
+				this.$el.append(userView.render().el);
+			}
 			return this;
 		}
 
+	});
+	
+	Dashboard.UserView = Backbone.View.extend({
+		initialize : function() {
+			_.bindAll(this, 'render');
+			this.template = $.template(userTemplate);
+			this.model.on('change', this.render);
+		},
+
+		render : function() {
+			this.$el.empty();
+			$.tmpl(this.template, this.model.toJSON()).appendTo(this.$el);
+			return this;
+		}
 	});
 
 	Dashboard.Grid = Backbone.View.extend({

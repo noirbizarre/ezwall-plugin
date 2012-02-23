@@ -12,7 +12,14 @@ define([
 
 	Jenkins.Model = Backbone.Model.extend({
 		url : function() {
-			var url = '%s/api/json'.replace('%s', this.get('url'));
+			var url = this.get('url');
+			if (!url) {
+				url = getValue(this.collection, 'url') || getValue(this, 'urlRoot');
+				url += url.charAt(url.length - 1) == '/' ? '' : '/';
+				url += encodeURIComponent(this.id);
+			}
+			url += url.charAt(url.length - 1) == '/' ? '' : '/';
+			url += 'api/json';
 			if (this.tree) {
 				url += '?tree=' + this.tree.join(',');
 			}
@@ -32,7 +39,40 @@ define([
 	
 	Jenkins.Build = Jenkins.Model.extend({});
 	
-	Jenkins.User = Jenkins.Model.extend({});
+	Jenkins.User = Jenkins.Model.extend({
+		parse : function(data) {
+			data.url = data.absoluteUrl;
+			delete data.absoluteUrl;
+			
+			for (var idx in data.property) {
+				var p = data.property[idx];
+				if ('address' in p) {
+					data.email = p.address;
+					break;
+				}
+			}
+			delete data.property;
+			
+			return data;
+		}
+	});
+	
+	Jenkins.UserList = Backbone.Collection.extend({
+		model : Jenkins.User,
+		url: function() {
+			return Jenkins.config.get('rootUrl') + '/user';
+		},
+		getOrFetch: function(id) {
+			var user = this.get(id);
+			if (!user) {
+				user = this.add({id:id}).get(id);
+				user.fetch();
+			}
+			return user;
+		}
+	});
+	
+	Jenkins.users = new Jenkins.UserList();
 
 	Jenkins.Job = Jenkins.Model.extend({
 		defaults : {
@@ -46,7 +86,7 @@ define([
 	        "url",
 	        "buildable",
 	        "color",
-	        "lastBuild[number,url]"
+	        "lastBuild[number,url,actions[causes[userId]]]"
         ],
 
 		color_regex : /([A-Za-z]+)(_anime)?/,
@@ -68,6 +108,22 @@ define([
 				break;
 			}
 			data.building = m[2] != undefined;
+			
+			if (data.lastBuild) {
+				data.lastBuild.users = [];
+				this.users = []
+				for (var idx_action in data.lastBuild.actions) {
+					var action = data.lastBuild.actions[idx_action];
+					for (var idx_cause in action.causes) {
+						var cause = action.causes[idx_cause];
+						if ('userId' in cause && cause.userId) {
+							data.lastBuild.users.push(cause.userId);
+							this.users.push(Jenkins.users.getOrFetch(cause.userId)); // Cache it
+						}
+					}
+				}
+				delete data.lastBuild.actions;
+			}
 			return data;
 		}
 	});
@@ -139,6 +195,13 @@ define([
 		
 
 	});
+	
+	// Helper function to get a value from a Backbone object as a property
+	// or as a function.
+	var getValue = function(object, prop) {
+		if (!(object && object[prop])) return null;
+		return _.isFunction(object[prop]) ? object[prop]() : object[prop];
+	};
 
 	return Jenkins;
 });
