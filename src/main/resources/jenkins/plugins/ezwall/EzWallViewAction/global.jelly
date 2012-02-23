@@ -20,7 +20,16 @@
 
 	<f:section title="${%EzWall.Title}" name="ezwall">
 		<f:entry title="${%EzWall.PollInterval}" field="pollInterval">
-			<f:textbox default="5"/>
+			<f:textbox/>
+		</f:entry>
+		<f:entry title="${%EzWall.ShowGravatar}" field="showGravatar">
+			<f:checkbox/>
+		</f:entry>
+		<f:entry title="${%EzWall.ShowUsername}" field="showUsername">
+			<f:checkbox/>
+		</f:entry>
+		<f:entry title="${%EzWall.ShowBuildNumber}" field="showBuildNumber">
+			<f:checkbox/>
 		</f:entry>
 	</f:section>
 

@@ -83,6 +83,21 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	public int getPollInterval() {
 		return getDescriptor().getPollInterval();
 	}
+
+	@Exported
+	public boolean getShowGravatar() {
+		return getDescriptor().getShowGravatar();
+	}
+
+	@Exported
+	public boolean getShowUsername() {
+		return getDescriptor().getShowUsername();
+	}
+
+	@Exported
+	public boolean getShowBuildNumber() {
+		return getDescriptor().getShowBuildNumber();
+	}
 	
 	@Exported
 	public String getVersion() {
@@ -106,6 +121,12 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	public static final class EzWallViewActionDescriptor extends Descriptor<EzWallViewAction> {
 
 		private int pollInterval = 5;
+		
+		private boolean showGravatar = false;
+		
+		private boolean showBuildNumber = false;
+		
+		private boolean showUsername = false;
 
 		@Override
 		public String getDisplayName() {
@@ -125,6 +146,30 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 
 		public void setPollInterval(int pollInterval) {
 			this.pollInterval = pollInterval;
+		}
+
+		public boolean getShowGravatar() {
+			return showGravatar;
+		}
+
+		public void setShowGravatar(boolean showGravatar) {
+			this.showGravatar = showGravatar;
+		}
+
+		public boolean getShowBuildNumber() {
+			return showBuildNumber;
+		}
+
+		public void setShowBuildNumber(boolean showJobNumber) {
+			this.showBuildNumber = showJobNumber;
+		}
+
+		public boolean getShowUsername() {
+			return showUsername;
+		}
+
+		public void setShowUsername(boolean showUsername) {
+			this.showUsername = showUsername;
 		}
 
 	}

@@ -1,4 +1,8 @@
-{{if avatar_url}}
-<img src="${avatar_url}}"/><br/>
-{{/if}}
-<a href="${url}"><span class="job-text">${fullName}</span></a>
+<a href="${url}">
+	{{if avatar_url}}
+	<img src="${avatar_url}}"/><br/>
+	{{/if}}
+	{{if fullName}}
+	<span class="job-text">${fullName}</span>
+	{{/if}}
+</a>

@@ -2,11 +2,12 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'models/jenkins',
   'models/gravatar',
   'text!templates/dashboard.html',
   'text!templates/job.html',
   'text!templates/user.html'
-], function($, _, Backbone, Gravatar, dashboardTemplate, jobTemplate, userTemplate){
+], function($, _, Backbone, Jenkins, Gravatar, dashboardTemplate, jobTemplate, userTemplate){
 
 	var Dashboard = {};
 
@@ -23,6 +24,9 @@ define([
 		render : function() {
 			this.$el.empty();
 			var json = this.model.toJSON();
+			if (!Jenkins.config.get('showBuildNumber')) {
+				delete json.lastBuild;
+			}
 			$.tmpl(this.template, json).appendTo(this.$el);
 			this.$el.addClass('job-status-' + this.model.get('status'));
 			this.$el.toggleClass('job-building', this.model.get('building'));
@@ -47,8 +51,11 @@ define([
 		render : function() {
 			this.$el.empty();
 			var json = this.model.toJSON();
-			if (this.model.has('email')) {
+			if (this.model.has('email') && Jenkins.config.get('showGravatar')) {
 				json.avatar_url = Gravatar.url(this.model.get('email'));
+			}
+			if (!Jenkins.config.get('showUsername')) {
+				delete json.fullName;
 			}
 			$.tmpl(this.template, json).appendTo(this.$el);
 			return this;
