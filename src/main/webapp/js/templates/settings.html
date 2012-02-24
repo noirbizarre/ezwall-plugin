@@ -1,8 +1,22 @@
 <div id="settings-container">
-	<form id="settings-server-form" class="server-form">
+	<form id="settings-form" class="form">
 		<div>
-			<label for="refresh">Poll Interval</label>
-			<input id="refresh" name="refresh" type="text" value="${pollInterval}" />
+			<label for="pollInterval">Poll interval</label>
+			<input id="pollInterval" name="pollInterval" type="text" value="${pollInterval}" />
+			
+			<fieldset>
+				<legend>Job display</legend>
+				
+				<label for="showBuildNumber">Build number</label>
+				<input id="showBuildNumber" name="showBuildNumber" type="checkbox" {{if showBuildNumber}}checked="checked"{{/if}} />
+				
+				<label for="showGravatar">Gravatar</label>
+				<input id="showGravatar" name="showGavatar" type="checkbox" {{if showGravatar}}checked="checked"{{/if}} />
+				
+				<label for="showUsername">User name</label>
+				<input id="showUsername" name="showUsername" type="checkbox" {{if showUsername}}checked="checked"{{/if}} />
+				
+			</fieldset>
 		</div>
 	</form>
 </div>

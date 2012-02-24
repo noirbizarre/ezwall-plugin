@@ -1,5 +1,5 @@
-<a href="${url}"><span class="job-text">${name}</span></a>
-{{if lastBuild}}
+<a href="${job.url}"><span class="job-text">${job.name}</span></a>
+{{if display.buildNumber && job.lastBuild}}
 <br/>
-<a href="${lastBuild.url}"><span class="job-text">#${lastBuild.number}</span></a>
+<a href="${job.lastBuild.url}"><span class="job-text">#${job.lastBuild.number}</span></a>
 {{/if}}

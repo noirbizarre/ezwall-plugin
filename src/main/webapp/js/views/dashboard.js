@@ -19,23 +19,31 @@ define([
 			_.bindAll(this, 'render');
 			this.template = $.template(jobTemplate);
 			this.model.on('change', this.render);
+			Jenkins.config.on('change:showBuildNumber', this.render);
 		},
 
 		render : function() {
 			this.$el.empty();
-			var json = this.model.toJSON();
-			if (!Jenkins.config.get('showBuildNumber')) {
-				delete json.lastBuild;
-			}
-			$.tmpl(this.template, json).appendTo(this.$el);
+			
+			var data = {};
+			
+			data.job = this.model.toJSON();
+			
+			data.display = {};
+			data.display.buildNumber = Jenkins.config.get('showBuildNumber');
+			
+			$.tmpl(this.template, data).appendTo(this.$el);
+			
 			this.$el.addClass('job-status-' + this.model.get('status'));
 			this.$el.toggleClass('job-building', this.model.get('building'));
+			
 			if (this.model.users && this.model.users.length > 0) {
 				var userView = new Dashboard.UserView({
 					model: this.model.users[0]
 				});
 				this.$el.append(userView.render().el);
 			}
+			
 			return this;
 		}
 
@@ -46,18 +54,26 @@ define([
 			_.bindAll(this, 'render');
 			this.template = $.template(userTemplate);
 			this.model.on('change', this.render);
+			Jenkins.config.on('change:showUsername', this.render);
+			Jenkins.config.on('change:showGravatar', this.render);
 		},
 
 		render : function() {
 			this.$el.empty();
-			var json = this.model.toJSON();
-			if (this.model.has('email') && Jenkins.config.get('showGravatar')) {
-				json.avatar_url = Gravatar.url(this.model.get('email'));
+			
+			var data = {};
+			
+			data.user= this.model.toJSON();
+			
+			data.display = {};
+			data.display.username = Jenkins.config.get('showUsername');
+			data.display.gravatar = Jenkins.config.get('showGravatar')
+			
+			if (this.model.has('email') && data.display.gravatar) {
+				data.user.gravatar = Gravatar.url(this.model.get('email'));
 			}
-			if (!Jenkins.config.get('showUsername')) {
-				delete json.fullName;
-			}
-			$.tmpl(this.template, json).appendTo(this.$el);
+			$.tmpl(this.template, data).appendTo(this.$el);
+			
 			return this;
 		}
 	});

@@ -134,3 +134,24 @@ body {
 	-ms-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
 	box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
 }
+
+.form label, .form input {
+	vertical-align: middle;
+	height: 30px;
+	margin: 5px;
+}
+
+.form label {
+	width: 150px;
+	float: left; clear: left;
+	text-align: right;
+}
+
+.form input {
+	width: 150px;
+}
+
+.form input[type=checkbox] {
+	width: 20px;
+	margin-right: 90px;
+}

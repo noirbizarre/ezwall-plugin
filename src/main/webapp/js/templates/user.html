@@ -1,8 +1,10 @@
-<a href="${url}">
-	{{if avatar_url}}
-	<img src="${avatar_url}}"/><br/>
+{{if user}}
+<a href="${user.url}">
+	{{if display.gravatar && user.gravatar}}
+	<img src="${user.gravatar}}"/><br/>
 	{{/if}}
-	{{if fullName}}
-	<span class="job-text">${fullName}</span>
+	{{if display.username}}
+	<span class="job-text">${user.fullName}</span>
 	{{/if}}
 </a>
+{{/if}}
