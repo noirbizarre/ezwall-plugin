@@ -29,9 +29,11 @@ body {
 
 	background: grey;
 	background-color: grey; /* Fall-back color */
-	background-image: -webkit-linear-gradient(top, grey, #000);
-	background-image: -moz-linear-gradient(top, grey, #000);
-	background-image: linear-gradient(top, grey, #000);
+	background-image: -webkit-linear-gradient(top, #808080, #606060);
+	background-image: -moz-linear-gradient(top, #808080, #606060);
+	background-image: linear-gradient(top, #808080, #606060);
+	
+	opacity: 0.95;
 }
 
 #header-display-zone {
@@ -41,6 +43,17 @@ body {
     
     width:100%;
 	height: 20px;
+}
+
+#main-menu a {
+	text-decoration: none;
+}
+
+#main-menu #view-name {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	margin: 5px;
 }
 
 #dashboard {

@@ -18,8 +18,13 @@ define([
 		initialize : function() {
 			console.log('AppRouter: initiliaze');
 
+			// Inialize the jenkins View
+			this.view = new Jenkins.View();
+			
 			// Initialize menu
-			this.menu = new Menu;
+			this.menu = new Menu({
+				model: this.view
+			});
 			this.menu.render();
 			this.menu.on('menu:refresh', function() {
 				this.view.fetchAll();
@@ -31,8 +36,6 @@ define([
 				this.navigate('about', true);
 			}, this);
 
-			// Inialize the jenkins View
-			this.view = new Jenkins.View();
 
 			// Initialize Dashboard
 			this.dashboard = new Dashboard.View({

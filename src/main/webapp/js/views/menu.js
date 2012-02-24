@@ -14,12 +14,14 @@ define([
 			_.bindAll(this, 'render', 'showMenu', 'hideMenu',
 					'onVisble', 'onHidden');
 			console.log('Menu: initialized');
+			this.model.on('change:name', this.render);
 			this._visible = false;
 		},
 
 		render : function() {
+			this.$el.empty();
 			console.log('Menu: render');
-			$.tmpl(menuTemplate, {}).appendTo(this.el);
+			$.tmpl(menuTemplate, this.model.toJSON()).appendTo(this.el);
 			//this.$('.menu-button').button();
 			this.$( '#refresh-button' ).button({ icons: {primary:'ui-icon-refresh'}});
 			this.$( '#settings-button' ).button({ icons: {primary:'ui-icon-wrench'}});
