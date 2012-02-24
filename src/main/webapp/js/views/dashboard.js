@@ -70,7 +70,8 @@ define([
 			data.display.gravatar = Jenkins.config.get('showGravatar')
 			
 			if (this.model.has('email') && data.display.gravatar) {
-				data.user.gravatar = Gravatar.url(this.model.get('email'));
+				
+				data.user.gravatar = Gravatar.url(this.model.get('email'), 125 );
 			}
 			$.tmpl(this.template, data).appendTo(this.$el);
 			
@@ -116,16 +117,12 @@ define([
 
 				// Remove margins and border
 				_.each([ 'left', 'right' ], function(side) {
-					width -= this.$('.job').css('margin-' + side).replace('px',
-							'');
-					width -= this.$('.job').css('border-' + side + '-width')
-							.replace('px', '');
+					width -= this.$('.job').css('margin-' + side).replace('px', '');
+					width -= this.$('.job').css('border-' + side + '-width').replace('px', '');
 				});
 				_.each([ 'top', 'bottom' ], function(side) {
-					height -= this.$('.job').css('margin-' + side).replace(
-							'px', '');
-					height -= this.$('.job').css('border-' + side + '-width')
-							.replace('px', '');
+					height -= this.$('.job').css('margin-' + side).replace('px', '');
+					height -= this.$('.job').css('border-' + side + '-width').replace('px', '');
 				});
 				this.$('.job').width(width).height(height);
 			}

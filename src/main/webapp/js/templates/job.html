@@ -1,5 +1,4 @@
 <a href="${job.url}"><span class="job-text">${job.name}</span></a>
 {{if display.buildNumber && job.lastBuild}}
-<br/>
 <a href="${job.lastBuild.url}"><span class="job-text">#${job.lastBuild.number}</span></a>
 {{/if}}
