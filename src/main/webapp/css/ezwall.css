@@ -122,6 +122,20 @@ body {
 	font-weight: bold;
 	display:inline-block;
 	vertical-align: middle;
+  	
+  	-webkit-transition: color 1s ease-in-out;
+    -moz-transition: color 1s ease-in-out;
+    -o-transition: color 1s ease-in-out;
+    -ms-transition: color 1s ease-in-out;
+    transition: color 1s ease-in-out;
+}
+
+#build-grid .job-glow {
+	background: white;
+}
+
+#build-grid .job-glow .job-text {
+	color: black;
 }
 
 .job-status-none {
@@ -138,14 +152,6 @@ body {
 
 .job-status-instable {
 	background: orange;
-}
-
-#build-grid .job-glow {
-  	-webkit-box-shadow: inset 0 0 10px 5px white, 0 0 15px white; 
-    -moz-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
-	-o-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
-	-ms-box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
-	box-shadow: inset 0 0 10px 5px white, 0 0 15px white;
 }
 
 .form label, .form input {
