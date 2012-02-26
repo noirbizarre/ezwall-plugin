@@ -1,6 +1,6 @@
 define([
   'backbone',
-  'router',
+  'router'
 ], function(Backbone, Router) {
 
 	var start = function() {

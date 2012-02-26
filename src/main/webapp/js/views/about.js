@@ -28,7 +28,7 @@ define([
 			this.$el.dialog('destroy');
 			this.remove();
 			this.trigger(About.CLOSE);
-		},
+		}
 
 	});
 

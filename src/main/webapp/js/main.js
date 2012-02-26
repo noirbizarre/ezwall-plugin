@@ -17,6 +17,6 @@ require([
 	'order!jquerytmpl',
 	'order!jqueryui',
 	'order!app'
-], function($$, _, backbone, jqueryTmpl, jqueryUi, App){
+], function($, _, backbone, jqueryTmpl, jqueryUi, App){
 	App.start();
 });
