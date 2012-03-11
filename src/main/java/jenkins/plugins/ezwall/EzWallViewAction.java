@@ -106,7 +106,7 @@ public class EzWallViewAction implements Action, Describable<EzWallViewAction> {
 	
 	@Exported
 	public String getRootUrl() {
-		return Jenkins.getInstance().getRootUrl();
+		return Jenkins.getInstance().getRootUrlFromRequest();
 	}
 	
 	public EzWallViewActionDescriptor getDescriptor() {

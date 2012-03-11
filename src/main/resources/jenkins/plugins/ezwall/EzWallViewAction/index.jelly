@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<j:jelly xmlns:j="jelly:core">
+<j:set var="rootURL" value="${request.contextPath}" />
 <html>
 
   <head>
@@ -21,3 +23,4 @@
   </body>
 
 </html>
+</j:jelly>
