@@ -36,7 +36,6 @@ define([
 				this.navigate('about', true);
 			}, this);
 
-
 			// Initialize Dashboard
 			this.dashboard = new Dashboard.View({
 				model : this.view

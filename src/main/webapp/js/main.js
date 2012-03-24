@@ -1,8 +1,8 @@
 console.log('EZWall starting...');
 require.config({
 	paths: {
-		jquery: 'libs/jquery-1.7.1.min',
-		jqueryui: 'libs/jquery-ui-1.8.17.min',
+		jquery: 'libs/jquery-1.7.2.min',
+		jqueryui: 'libs/jquery-ui-1.8.18.min',
 		jquerytmpl: 'libs/jquery.tmpl.min',
 		underscore: 'libs/underscore-amd-min',
 		backbone: 'libs/backbone-0.9.1-amd-min',
