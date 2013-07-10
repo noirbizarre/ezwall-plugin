@@ -188,6 +188,11 @@ body {
 .job-user:after {
     content: ")";
 }
+.job div img {
+    float: left;
+    width: 20px;
+    padding-top: 3px;
+}
 
 .job-status-ok {
     /* Smooth gray successes */
