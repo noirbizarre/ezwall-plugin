@@ -157,18 +157,7 @@ body {
 }
 .job-building .job-text {
     /* Align the job title to account for the throbber */
-    margin-left: 44px !important;
-}
-.job-building .job-text:after {
-    /* And make it say "(now building)" */
-    content: "(now building)";
-    color: #aaa;
-    font-size: 18px;
-    display: block;
-}
-.job-building .job-build-number {
-    /* I think these are already hidden properly */
-    display: none !important;
+    margin-left: 44px;
 }
 .job-build-number {
     color: #aaa !important;
@@ -181,12 +170,7 @@ body {
     font-size: 18px !important;
     display: block;
     float: left;
-}
-.job-user:before {
-    content: "(";
-}
-.job-user:after {
-    content: ")";
+    margin-left: 0px !important;
 }
 .job div img {
     float: left;
