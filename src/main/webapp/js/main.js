@@ -6,7 +6,8 @@ require.config({
 		jquerytmpl: 'libs/jquery.tmpl.min',
 		underscore: 'libs/underscore-amd-min',
 		backbone: 'libs/backbone-0.9.1-amd-min',
-		md5: 'libs/spark-md5.amd'
+		md5: 'libs/spark-md5.amd',
+		purl: 'libs/purl',
 	}
 });
 
@@ -16,7 +17,8 @@ require([
 	'order!backbone',
 	'order!jquerytmpl',
 	'order!jqueryui',
-	'order!app'
-], function($, _, backbone, jqueryTmpl, jqueryUi, App){
+	'order!app',
+	'order!purl',
+], function($, _, backbone, jqueryTmpl, jqueryUi, App, Purl){
 	App.start();
 });
