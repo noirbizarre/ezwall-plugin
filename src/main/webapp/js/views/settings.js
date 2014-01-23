@@ -41,6 +41,7 @@ define([
 		ok : function() {
 			console.log('SettingsPopup: ok');
 			this.model.set('pollInterval', this.$('#pollInterval').val());
+			this.model.set('jobViewSource', this.$('#jobViewSource').val());
 			this.model.set('showGravatar', this.$('#showGravatar').is(':checked'));
 			this.model.set('showUsername', this.$('#showUsername').is(':checked'));
 			this.model.set('showBuildNumber', this.$('#showBuildNumber').is(':checked'));

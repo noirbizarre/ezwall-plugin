@@ -4,9 +4,12 @@
 			<label for="pollInterval">Poll interval</label>
 			<input id="pollInterval" name="pollInterval" type="text" value="${pollInterval}" />
 			
-			<fieldset>
-				<legend>Job display</legend>
+			<label for="jobViewSource">Job View Source</label>
+			<input id="jobViewSource" name="jobViewSource" type="text" value="${jobViewSource}" />
 				
+			<fieldset>
+                <legend>Job display</legend>
+
 				<label for="showBuildNumber">Build number</label>
 				<input id="showBuildNumber" name="showBuildNumber" type="checkbox" {{if showBuildNumber}}checked="checked"{{/if}} />
 				
