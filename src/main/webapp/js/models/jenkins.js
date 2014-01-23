@@ -19,6 +19,9 @@ define([
 				url += encodeURIComponent(this.id);
 			}
 			url += url.charAt(url.length - 1) == '/' ? '' : '/';
+			if (this.job_source) {
+				url += this.job_source()
+			}
 			url += 'api/json';
 			if (this.tree) {
 				url += '?tree=' + this.tree.join(',');
@@ -31,6 +34,7 @@ define([
 		defaults : {
 			url : "http://localhost:8080/ezwall",
 			pollInterval : 5,
+			jobViewSource : $.url(true).param('jobViewSource'),
 			version : "NA"
 		}
 	});
@@ -80,13 +84,14 @@ define([
 			status : Jenkins.STATUS_NONE,
 			building : false
 		},
+		job_source : false,
 		tree : [
-	        "displayName",
-	        "name",
-	        "url",
-	        "buildable",
-	        "color",
-	        "lastBuild[number,url,actions[causes[userId]]]"
+			"displayName",
+			"name",
+			"url",
+			"buildable",
+			"color",
+			"lastBuild[number,url,actions[causes[userId]]]"
         ],
 
 		color_regex : /([A-Za-z]+)(_anime)?/,
@@ -146,9 +151,9 @@ define([
 		},
 		
 		tree : [
-	        "name",
-	        "url",
-	        "jobs[name,url,color]"
+			"name",
+			"url",
+			"jobs[name,url,color]"
         ],
 		
 		initialize : function() {
@@ -175,9 +180,21 @@ define([
 				_.delay(this.poll, interval * 1000);
 			}
 		},
+
+		job_source : function() {
+			var source = Jenkins.config.get('jobViewSource');
+			if(source) {
+				return 'view/' + source + '/';
+			}
+			return '';
+		},
 		
 		updateSettings : function() {
 			if (Jenkins.config.hasChanged('url')) {
+				this.set('url', Jenkins.config.get('url') + '/..');
+				this.fetchAll();
+			}
+			if (Jenkins.config.hasChanged('jobViewSource')) {
 				this.set('url', Jenkins.config.get('url') + '/..');
 				this.fetchAll();
 			}
