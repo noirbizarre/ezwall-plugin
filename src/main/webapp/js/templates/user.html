@@ -1,10 +1,10 @@
 {{if user}}
 <a href="${user.url}">
 	{{if display.gravatar && user.gravatar}}
-	<img src="${user.gravatar}}"/><br/>
+	<img src="${user.gravatar}}" />
 	{{/if}}
 	{{if display.username}}
-	<span class="job-text">${user.fullName}</span>
+	<span class="job-text job-user">${user.fullName}</span>
 	{{/if}}
 </a>
 {{/if}}

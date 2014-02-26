@@ -109,9 +109,8 @@ define([
 
 		resize : function() {
 			if (this.collection.length > 0) {
-				var sqrt = Math.sqrt(this.collection.length)
-				var nbCols = Math.ceil(sqrt);
-				var nbRows = Math.round(sqrt);
+				var nbCols = 6;
+				var nbRows = Math.ceil(this.collection.length / nbCols);
 				var width = this.$el.width() / nbCols;
 				var height = this.$el.height() / nbRows;
 

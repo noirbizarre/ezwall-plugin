@@ -1,111 +1,109 @@
 body {
-	background: black;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
+    background-color: black;
+    background-image: url(../img/stripes.png);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #ezwall-container {
-	display:block;
+    display:block;
 
     position:absolute;
     top:0;
     left:0;
-    
+
     width:100%;
     height:100%;
 }
 
 #header {
-	position:absolute;
+    position:absolute;
     top:0;
     left:0;
-	z-index: 0;
-    
-    width:100%;
-	height: 35px;
-	display: none;
+    z-index: 0;
 
-	background: grey;
-	background-color: grey; /* Fall-back color */
-	background-image: -webkit-linear-gradient(top, #808080, #606060);
-	background-image: -moz-linear-gradient(top, #808080, #606060);
-	background-image: linear-gradient(top, #808080, #606060);
-	
-	opacity: 0.95;
+    width:100%;
+    height: 35px;
+    display: none;
+
+    background: grey;
+    background-color: grey; /* Fall-back color */
+    background-image: -webkit-linear-gradient(top, #808080, #606060);
+    background-image: -moz-linear-gradient(top, #808080, #606060);
+    background-image: linear-gradient(top, #808080, #606060);
+
+    opacity: 0.95;
 }
 
 #header-display-zone {
     position:absolute;
     top:0;
     left:0;
-    
+
     width:100%;
-	height: 20px;
+    height: 20px;
 }
 
 #main-menu a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #main-menu #view-name {
-	text-decoration: none;
-	color: white;
-	font-weight: bold;
-	margin: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin: 5px;
 }
 
 #dashboard {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #build-grid {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #build-grid .job {
-	margin: 8px;
-	float: left;
-	font-size: 2em;
-	text-align: center;
-	border-radius: 10px;
-	box-shadow: 2px 2px 3px gray;
-	
-	/* CSS3 Box layout */
-	
-	display: -webkit-box;
-	display: -moz-box;
-	display: -o-box;
-	display: -ms-box;
-	display: box;
-	
-	-webkit-box-orient: vertical;
-	-moz-box-orient: vertical;
-	-o-box-orient: vertical;
-	-ms-box-orient: vertical;
-	box-orient: vertical;
-	
-  	-webkit-box-pack: center;
-  	-moz-box-pack: center;
-  	-o-box-pack: center;
-  	-ms-box-pack: center;
-  	box-pack: center;
-  	
-  	-webkit-box-align: center;
-  	-moz-box-align: center;
-  	-o-box-align: center;
-  	-ms-box-align: center;
-  	box-align: center;
-  	
-  	-webkit-transition: all 1s ease-in-out;
+    padding: 0px;
+    white-space: nowrap;
+    font-size: 24px;
+    margin: 0px;
+    overflow: hidden;
+
+    text-shadow: none;
+    box-shadow: none;
+    text-align: left;
+
+    /* Let the backgrounds be rounded */
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    float: left;
+
+    /* CSS3 Box layout */
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -o-box;
+    display: -ms-box;
+    display: box;
+
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -o-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+
+    -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
@@ -113,64 +111,100 @@ body {
 }
 
 #build-grid .job a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #build-grid .job-text {
-	color: white;
-	text-shadow: 0px 2px 3px #555;
-	font-weight: bold;
-	display:inline-block;
-	vertical-align: middle;
-  	
-  	-webkit-transition: color 1s ease-in-out;
+    color: #DEDEDE;
+    text-shadow: none;
+    font-weight: normal;
+    font: normal normal normal 1em 'Lucida Grande', 'Droid Sans', 'DejaVu Sans', Tahoma, sans-serif;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    padding: 3px;
+
+    -webkit-transition: color 1s ease-in-out;
     -moz-transition: color 1s ease-in-out;
     -o-transition: color 1s ease-in-out;
     -ms-transition: color 1s ease-in-out;
     transition: color 1s ease-in-out;
 }
 
-#build-grid .job-glow {
-	background: white;
+.job-glow.job-building {
+    /* Make the job "glow" blue as it's building */
+    background-color: rgba(0, 63, 255, 0.30) !important;
 }
 
-#build-grid .job-glow .job-text {
-	color: black;
+.job-building {
+    /* When a job is building, show the spinning throbber... */
+    background-image: url(../img/throbber.png);
+    background-size: 42px 42px;
+    background-repeat: no-repeat;
+    background-position: 0px 8px;
 }
-
-.job-status-none {
-	background: grey;
+.job-building .job-text {
+    /* Align the job title to account for the throbber */
+    margin-left: 44px;
+}
+.job-build-number {
+    color: #aaa !important;
+    font-size: 18px !important;
+    display: block !important;
+    float: left;
+}
+.job-user {
+    color: #aaa !important;
+    font-size: 18px !important;
+    display: block;
+    float: left;
+    margin-left: 0px !important;
+}
+.job div img {
+    float: left;
+    width: 20px;
+    padding-top: 3px;
 }
 
 .job-status-ok {
-	background: green;
+    /* Smooth gray successes */
+    background-color: rgba(0,0,0,0);
 }
-
 .job-status-ko {
-	background: red;
+    /* Alarmingly red failures */
+    background-color: #a00;
+}
+.job-status-instable {
+    /* Unstable (instable?) jobs are orange */
+    background-color: #FF892D;
+}
+.job-status-none {
+    /* Hide disabled jobs */
+    background-color: rgba(0,0,0,0);
 }
 
-.job-status-instable {
-	background: orange;
+.job-status-none .job-text {
+    opacity: 0.4;
 }
 
 .form label, .form input {
-	vertical-align: middle;
-	height: 30px;
-	margin: 5px;
+    vertical-align: middle;
+    height: 30px;
+    margin: 5px;
 }
 
 .form label {
-	width: 150px;
-	float: left; clear: left;
-	text-align: right;
+    width: 150px;
+    float: left; clear: left;
+    text-align: right;
 }
 
 .form input {
-	width: 150px;
+    width: 150px;
 }
 
 .form input[type=checkbox] {
-	width: 20px;
-	margin-right: 90px;
+    width: 20px;
+    margin-right: 90px;
 }
+
