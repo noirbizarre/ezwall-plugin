@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<j:jelly xmlns:j="jelly:core">
-<j:set var="rootURL" value="${request.contextPath}" />
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:x="jelly:xml">
+<st:contentType value="text/html;charset=UTF-8" />
+<x:doctype name="html" />
 <html>
 
   <head>
     <meta charset="utf-8"/>
     <title>EZWall</title>
     <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/ezwall/css/Aristo/Aristo.css" />
-    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/ezwall/css/ezwall.css" />  
+    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/ezwall/css/ezwall.css" />
     <script type="text/javascript"
     	src="${rootURL}/plugin/ezwall/js/require.js"
     	data-main="${rootURL}/plugin/ezwall/js/main">
@@ -19,7 +20,7 @@
       <div id="dashboard"></div>
       <div id="header-display-zone"></div>
       <header id="header" class="header"></header>
-    </div>    
+    </div>
   </body>
 
 </html>
